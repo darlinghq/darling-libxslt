@@ -67,3 +67,5 @@ target_link_libraries(exslt system xslt)
 
 install(TARGETS xslt exslt DESTINATION ${CMAKE_INSTALL_LIBDIR}/darling)
 
+install(FILES doc/xsltproc.1 DESTINATION libexec/darling/usr/share/man/man1)
+install(FILES libexslt/libexslt.3 libxslt/libxslt.3 DESTINATION libexec/darling/usr/share/man/man3)
