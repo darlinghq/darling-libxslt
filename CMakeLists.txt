@@ -13,11 +13,6 @@ add_definitions(-D__APPLE__ -D__DYNAMIC__)
 add_definitions(-D__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__=1080)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -nostdinc -D__DARWIN_UNIX03 -fPIC -w")
-set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -nostdlib -Wl,--version-script=${DARLING_TOP_DIRECTORY}/darwin.map")
-
-SET(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR}/darling")
-SET(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE) 
-SET(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../icu/icuSources/common)
@@ -59,13 +54,19 @@ set(exslt_SRCS
 	libexslt/strings.c
 )
 
-add_library(xslt SHARED ${xslt_SRCS})
+set(DYLIB_INSTALL_NAME "/usr/lib/libxslt.1.dylib")
+add_darling_library(xslt SHARED ${xslt_SRCS})
 target_link_libraries(xslt system xml2)
+set_target_properties(xslt PROPERTIES OUTPUT_NAME "xslt.1")
+InstallSymlink("libxslt.1.dylib" "${CMAKE_INSTALL_PREFIX}/libexec/darling/usr/lib/libxslt.dylib")
 
-add_library(exslt SHARED ${exslt_SRCS})
+set(DYLIB_INSTALL_NAME "/usr/lib/libexslt.0.dylib")
+add_darling_library(exslt SHARED ${exslt_SRCS})
 target_link_libraries(exslt system xslt)
+set_target_properties(exslt PROPERTIES OUTPUT_NAME "exslt.0")
+InstallSymlink("libexslt.0.dylib" "${CMAKE_INSTALL_PREFIX}/libexec/darling/usr/lib/libexslt.dylib")
 
-install(TARGETS xslt exslt DESTINATION ${CMAKE_INSTALL_LIBDIR}/darling)
+install(TARGETS xslt exslt DESTINATION libexec/darling/usr/lib)
 
 install(FILES doc/xsltproc.1 DESTINATION libexec/darling/usr/share/man/man1)
 install(FILES libexslt/libexslt.3 libxslt/libxslt.3 DESTINATION libexec/darling/usr/share/man/man3)
