@@ -55,6 +55,8 @@ set(exslt_SRCS
 )
 
 set(DYLIB_INSTALL_NAME "/usr/lib/libxslt.1.dylib")
+set(DYLIB_COMPAT_VERSION "3.0.0")
+set(DYLIB_CURRENT_VERSION "3.0.0")
 add_darling_library(xslt SHARED ${xslt_SRCS})
 make_fat(xslt)
 target_link_libraries(xslt system xml2)
