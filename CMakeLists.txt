@@ -64,8 +64,11 @@ set_target_properties(xslt PROPERTIES OUTPUT_NAME "xslt.1")
 InstallSymlink("libxslt.1.dylib" "${CMAKE_INSTALL_PREFIX}/libexec/darling/usr/lib/libxslt.dylib")
 
 set(DYLIB_INSTALL_NAME "/usr/lib/libexslt.0.dylib")
+set(DYLIB_COMPAT_VERSION "9.0.0")
+set(DYLIB_CURRNT_VERSION "9.15.0")
 add_darling_library(exslt SHARED ${exslt_SRCS})
 make_fat(exslt)
+
 target_link_libraries(exslt system xslt)
 set_target_properties(exslt PROPERTIES OUTPUT_NAME "exslt.0")
 InstallSymlink("libexslt.0.dylib" "${CMAKE_INSTALL_PREFIX}/libexec/darling/usr/lib/libexslt.dylib")
