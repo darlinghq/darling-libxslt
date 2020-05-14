@@ -13,8 +13,6 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -nostdinc -D__DARWIN_UNIX03 -fPIC -w")
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../icu/icuSources/common)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../libxml2/include)
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/../libxml2/include)
 
 set(xslt_SRCS
 	libxslt/attributes.c
