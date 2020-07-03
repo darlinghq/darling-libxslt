@@ -6,51 +6,56 @@ if(COMMAND cmake_policy)
 	cmake_policy(SET CMP0003 NEW)
 endif(COMMAND cmake_policy)
 
-add_definitions(-DHAVE_STDINT_H=1)
+add_definitions(
+	-DHAVE_CONFIG_H
+	-D_REENTRANT
+)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -nostdinc -D__DARWIN_UNIX03 -fPIC -w")
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../icu/icuSources/common)
+include_directories(
+	${CMAKE_CURRENT_SOURCE_DIR}/libxslt
+	"${CMAKE_CURRENT_SOURCE_DIR}/Pregenerated Files/include"
+)
 
 set(xslt_SRCS
-	libxslt/attributes.c
-	libxslt/attrvt.c
-	libxslt/documents.c
-	libxslt/extensions.c
-	libxslt/extra.c
-	libxslt/functions.c
-	libxslt/imports.c
-	libxslt/keys.c
-	libxslt/namespaces.c
-	libxslt/numbers.c
-	libxslt/pattern.c
-	libxslt/preproc.c
-	libxslt/security.c
-	libxslt/templates.c
-	libxslt/transform.c
-	libxslt/variables.c
-	libxslt/xslt.c
-	libxslt/xsltlocale.c
-	libxslt/xsltutils.c
+	libxslt/libxslt/attributes.c
+	libxslt/libxslt/attrvt.c
+	libxslt/libxslt/documents.c
+	libxslt/libxslt/extensions.c
+	libxslt/libxslt/extra.c
+	libxslt/libxslt/functions.c
+	libxslt/libxslt/imports.c
+	libxslt/libxslt/keys.c
+	libxslt/libxslt/namespaces.c
+	libxslt/libxslt/numbers.c
+	libxslt/libxslt/pattern.c
+	libxslt/libxslt/preproc.c
+	libxslt/libxslt/security.c
+	libxslt/libxslt/templates.c
+	libxslt/libxslt/transform.c
+	libxslt/libxslt/variables.c
+	libxslt/libxslt/xslt.c
+	libxslt/libxslt/xsltlocale.c
+	libxslt/libxslt/xsltutils.c
 )
 
 set(exslt_SRCS
-	libexslt/common.c
-	libexslt/crypto.c
-	libexslt/date.c
-	libexslt/dynamic.c
-	libexslt/exslt.c
-	libexslt/functions.c
-	libexslt/math.c
-	libexslt/saxon.c
-	libexslt/sets.c
-	libexslt/strings.c
+	libxslt/libexslt/common.c
+	libxslt/libexslt/crypto.c
+	libxslt/libexslt/date.c
+	libxslt/libexslt/dynamic.c
+	libxslt/libexslt/exslt.c
+	libxslt/libexslt/functions.c
+	libxslt/libexslt/math.c
+	libxslt/libexslt/saxon.c
+	libxslt/libexslt/sets.c
+	libxslt/libexslt/strings.c
 )
 
 set(DYLIB_INSTALL_NAME "/usr/lib/libxslt.1.dylib")
 set(DYLIB_COMPAT_VERSION "3.0.0")
-set(DYLIB_CURRENT_VERSION "3.0.0")
+set(DYLIB_CURRENT_VERSION "3.26.0")
 add_darling_library(xslt SHARED ${xslt_SRCS})
 make_fat(xslt)
 target_link_libraries(xslt system xml2)
