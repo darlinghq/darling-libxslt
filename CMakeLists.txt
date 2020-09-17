@@ -74,5 +74,5 @@ InstallSymlink("libexslt.0.dylib" "${CMAKE_INSTALL_PREFIX}/libexec/darling/usr/l
 
 install(TARGETS xslt exslt DESTINATION libexec/darling/usr/lib)
 
-install(FILES doc/xsltproc.1 DESTINATION libexec/darling/usr/share/man/man1)
-install(FILES libexslt/libexslt.3 libxslt/libxslt.3 DESTINATION libexec/darling/usr/share/man/man3)
+install(FILES libxslt/doc/xsltproc.1 DESTINATION libexec/darling/usr/share/man/man1)
+install(FILES libxslt/libexslt/libexslt.3 libxslt/libxslt/libxslt.3 DESTINATION libexec/darling/usr/share/man/man3)
